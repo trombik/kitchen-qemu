@@ -315,6 +315,14 @@ The default value is unset, or `nil`.
 
 Path to kernel.
 
+### <a name="config-append"></a> append
+
+Append kernel command line.
+
+### <a name="config-machine"></a> machine
+
+Select the emulated machine.
+
 ## <a name="development"></a> Development
 
 * Source hosted at [GitHub][repo]

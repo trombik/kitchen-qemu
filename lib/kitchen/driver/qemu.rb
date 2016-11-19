@@ -219,6 +219,8 @@ module Kitchen
         cmd.push('-spice', config[:spice].to_s) if config[:spice]
         cmd.push('-vnc',   config[:vnc].to_s)   if config[:vnc]
         cmd.push('-kernel', config[:kernel].to_s) if config[:kernel]
+        cmd.push('-append', config[:append].to_s) if config[:append]
+        cmd.push('-machine', config[:machine].to_s) if config[:machine]
 
         cmd.push('-device', 'virtio-scsi-pci,id=scsi')
         config[:image].each_with_index do |image, i|
