@@ -311,6 +311,10 @@ installed. There are several different behaviors available:
 
 The default value is unset, or `nil`.
 
+### <a name="config-kernel"></a> kernel
+
+Path to kernel.
+
 ## <a name="development"></a> Development
 
 * Source hosted at [GitHub][repo]
