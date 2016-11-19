@@ -323,6 +323,10 @@ Append kernel command line.
 
 Select the emulated machine.
 
+### <a name="config-cpu"></a> cpu
+
+Select CPU model.
+
 ## <a name="development"></a> Development
 
 * Source hosted at [GitHub][repo]

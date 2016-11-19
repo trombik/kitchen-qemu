@@ -221,6 +221,7 @@ module Kitchen
         cmd.push('-kernel', config[:kernel].to_s) if config[:kernel]
         cmd.push('-append', config[:append].to_s) if config[:append]
         cmd.push('-machine', config[:machine].to_s) if config[:machine]
+        cmd.push('-cpu', config[:cpu].to_s) if config[:cpu]
 
         cmd.push('-device', 'virtio-scsi-pci,id=scsi')
         config[:image].each_with_index do |image, i|
