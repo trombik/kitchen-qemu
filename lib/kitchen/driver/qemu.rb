@@ -84,16 +84,6 @@ module Kitchen
             :netdev => 'user,id=user,net=192.168.1.0/24,hostname=%h,hostfwd=tcp::%p-:22',
             :device => 'virtio-net-pci,netdev=user',
           }]
-        else
-          raise UserError, "Invalid network entry for #{instance.to_str}" unless
-            config[:networks].kind_of?(Array)
-
-          config[:networks].each_with_index do |network, i|
-            raise UserError, "Invalid network entry #{i+1} for #{instance.to_str}" unless
-              network.kind_of?(Hash) && network[:device].kind_of?(String)
-            raise UserError, "Invalid network entry #{i+1} for #{instance.to_str}" if
-              network.has_key?(:device) && !network[:device].kind_of?(String)
-          end
         end
 
         acpi_poweroff = false
@@ -204,6 +194,7 @@ module Kitchen
 
         port = config[:port]
         port = random_free_port('127.0.0.1', config[:port_min], config[:port_max]) if port.nil?
+=begin
         config[:networks].each do |network|
           cmd.push(
             '-netdev',
@@ -211,7 +202,22 @@ module Kitchen
               .gsub(/hostfwd=[^,]*/) { |x| x.gsub('%p', port.to_s) }
               .gsub(/hostname=%h/, "hostname=#{hostname}")
           ) if network[:netdev]
-          cmd.push('-device', network[:device])
+          cmd.push('-device', network[:device]) if network[:device]
+          cmd.push('--net', network[:net]) if network[:net
+        end
+=end
+        config[:networks].each do |network|
+          network.keys.each do |key|
+            command = network[:key].to_s
+            case network[:key].class
+            when Array
+              network[:key].each do |v|
+                cmd.push(command, v)
+              end
+            when String
+              cmd.push(command, network[:key])
+            end
+          end
         end
 
         cmd.push('-bios',  config[:bios].to_s)  if config[:bios]
